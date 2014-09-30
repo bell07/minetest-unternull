@@ -2,15 +2,15 @@ minetest.register_craft({
 	type = "cooking",
 	output = "default:lava_source",
 	recipe = "default:stone",
-	cooktime = 30,
+	cooktime = 20,
 })
 
 minetest.register_craft({
 	output = 'default:furnace',
 	recipe = {
-		{'default:cobble', 'default:cobble', 'default:cobble'},
-		{'default:cobble', '', 'default:cobble'},
-		{'default:cobble', 'default:cobble', 'default:cobble'},
+		{'group:stone', 'group:stone', 'group:stone'},
+		{'group:stone', '', 'group:stone'},
+		{'group:stone', 'group:stone', 'group:stone'},
 	}
 })
 
@@ -22,6 +22,51 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'default:pick_stone',
+	recipe = {
+		{'group:stone', 'group:stone', 'group:stone'},
+		{'', 'group:stick', ''},
+		{'', 'group:stick', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:shovel_stone',
+	recipe = {
+		{'group:stone'},
+		{'group:stick'},
+		{'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:axe_stone',
+	recipe = {
+		{'group:stone', 'group:stick'},
+		{'group:stone', 'group:stick'},
+		{'', 'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:sword_stone',
+	recipe = {
+		{'group:stone'},
+		{'group:stone'},
+		{'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = "farming:hoe_stone",
+	recipe = {
+		{"group:stone", "group:stone"},
+		{"", "group:stick"},
+		{"", "group:stick"}
+	}
+})
+
 if not minetest.get_modpath("nodetest") then
 
 minetest.register_node(":nodetest:papyrus_roots", {
@@ -30,10 +75,6 @@ minetest.register_node(":nodetest:papyrus_roots", {
 	paramtype = "light",
 	is_ground_content = true,
 	liquids_pointable = true,
---	after_dig_node = function(pos, node, metadata, digger)
---			node.name = "default:papyrus"
---			default.dig_up(pos, node, digger)
---		end,
 	groups = {snappy=3,flammable=2},
 	sounds = default.node_sound_leaves_defaults(),
 })
