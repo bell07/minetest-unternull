@@ -6,12 +6,9 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:furnace',
-	recipe = {
-		{'group:stone', 'group:stone', 'group:stone'},
-		{'group:stone', '', 'group:stone'},
-		{'group:stone', 'group:stone', 'group:stone'},
-	}
+	output = "default:mossycobble",
+	type = "shapeless",
+	recipe = {"default:cobble", "group:flora"},
 })
 
 minetest.register_craft({
