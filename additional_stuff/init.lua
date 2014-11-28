@@ -13,11 +13,13 @@ minetest.register_craft({
 
 minetest.register_craft({
 	output = "default:chest_locked",
+	type = "shapeless",
 	recipe = {"default:chest"},
 })
 
 minetest.register_craft({
 	output = "default:chest",
+	type = "shapeless",
 	recipe = {"default:chest_locked"},
 })
 
