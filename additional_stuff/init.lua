@@ -12,6 +12,16 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = "default:chest_locked",
+	recipe = {"default:chest"},
+})
+
+minetest.register_craft({
+	output = "default:chest",
+	recipe = {"default:chest_locked"},
+})
+
+minetest.register_craft({
 	output = 'default:dirt',
 	recipe = {
 		{'default:papyrus_roots', 'default:papyrus_roots'},
