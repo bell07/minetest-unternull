@@ -25,6 +25,7 @@ local crushingfurnace_receipes = {
 	--input                 output            time
 	{"default:cobble", "default:gravel",      8},
 	{"default:gravel", "default:sand",        5},
+	{"default:sand", "default:dirt",        5},
 }
 
 function crushingfurnace_get_craft_result(input)
