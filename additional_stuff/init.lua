@@ -14,8 +14,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'default:dirt',
 	recipe = {
-		{'default:papyrus_roots', 'default:papyrus_roots'},
-		{'default:papyrus_roots', 'default:papyrus_roots'},
+		{'nodetest:papyrus_roots', 'nodetest:papyrus_roots'},
+		{'nodetest:papyrus_roots', 'nodetest:papyrus_roots'},
 	}
 })
 
