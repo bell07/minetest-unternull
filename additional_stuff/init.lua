@@ -97,3 +97,35 @@ minetest.register_abm({
 })
 
 end
+
+-- Lava cooling
+default.cool_lava = function(pos, node)
+	if node.name == "default:lava_source" then
+		-- different or subgame used
+		if minetest.registered_items["default:molten_rock"] then
+			-- Voxelgarden
+			minetest.set_node(pos, {name = "default:molten_rock"})
+		elseif minetest.registered_items["default:obsidian"] then
+			-- Minetest Game
+			minetest.set_node(pos, {name = "default:obsidian"})
+		else
+			-- Unsupported
+			minetest.set_node(pos, {name = "default:stone"})
+		end
+	else -- Lava flowing
+		-- find one ore per max stack
+		local oneinastack = minetest.nodedef_default.stack_max
+		if math.random(1, oneinastack) == 1 then
+			local ore_choice = math.random(1, 2)
+			if ore_choice == 1 then
+				minetest.set_node(pos, {name = "default:stone_with_copper"})
+			elseif ore_choice == 2 then
+				minetest.set_node(pos, {name = "default:stone_with_iron"})
+			end
+		else
+			minetest.set_node(pos, {name = "default:stone"})
+		end
+	end
+	minetest.sound_play("default_cool_lava",
+		{pos = pos, max_hear_distance = 16, gain = 0.25})
+end
