@@ -16,4 +16,6 @@ CC BY-SA 3.0
 
 Authors of media files:
 -----------------------
-See: https://github.com/minetest/minetest_game/blob/master/mods/default/README.txt
+
+Casimir (CC BY-SA 4.0)
+  crushingfurnace*

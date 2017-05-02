@@ -4,8 +4,8 @@
 local function get_furnace_active_formspec(pos, percent)
 	local formspec =
 		"size[8,9]"..
-		"image[2,2;1,1;crushingfurnace_crush_bg.png^[lowpart:"..
-		(100-percent)..":crushingfurnace_crush_fg.png]"..
+		"image[2,2;1,1;default_furnace_fire_bg.png^[lowpart:"..
+		(100-percent)..":default_furnace_fire_fg.png]"..
 		"list[current_name;fuel;2,3;1,1;]"..
 		"list[current_name;src;2,1;1,1;]"..
 		"list[current_name;dst;5,1;2,2;]"..
@@ -15,7 +15,7 @@ end
 
 local furnace_inactive_formspec =
 	"size[8,9]"..
-	"image[2,2;1,1;crushingfurnace_crush_bg.png]"..
+	"image[2,2;1,1;default_furnace_fire_bg.png]"..
 	"list[current_name;fuel;2,3;1,1;]"..
 	"list[current_name;src;2,1;1,1;]"..
 	"list[current_name;dst;5,1;2,2;]"..
@@ -42,17 +42,24 @@ function crushingfurnace_get_craft_result(input)
 end
 
 minetest.register_node("crushingfurnace:furnace", {
-	description = "Crushing Furnace",
+	description = "Grinder",
+	drawtype = "nodebox",
 	tiles = {"crushingfurnace_top.png", "crushingfurnace_bottom.png", "crushingfurnace_side.png",
-		"crushingfurnace_side.png", "crushingfurnace_side.png", "crushingfurnace_front.png"},
+		"crushingfurnace_side.png", "crushingfurnace_side.png", "crushingfurnace_side.png"},
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	legacy_facedir_simple = true,
+	node_box = {
+		type = "fixed",
+		fixed = {{-0.5, 0.5, -0.5, 0.5, 0+1/16, 0.5},
+				{-0.5+1/16, 0+1/16, -0.5+1/16, 0.5-1/16, 0-1/16, 0.5-1/16},
+				{-0.5, -0.5, -0.5, 0.5, 0-1/16, 0.5},}
+	},
 	sounds = default.node_sound_stone_defaults(),
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", furnace_inactive_formspec)
-		meta:set_string("infotext", "Crushing Furnace")
+		meta:set_string("infotext", "Grinder")
 		local inv = meta:get_inventory()
 		inv:set_size("fuel", 1)
 		inv:set_size("src", 1)
@@ -76,7 +83,7 @@ minetest.register_node("crushingfurnace:furnace", {
 		if listname == "fuel" then
 			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
 				if inv:is_empty("src") then
-					meta:set_string("infotext","Crushing Furnace is empty")
+					meta:set_string("infotext","Grinder is empty")
 				end
 				return stack:get_count()
 			else
@@ -95,7 +102,7 @@ minetest.register_node("crushingfurnace:furnace", {
 		if to_list == "fuel" then
 			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
 				if inv:is_empty("src") then
-					meta:set_string("infotext","Crushing Furnace is empty")
+					meta:set_string("infotext","Grinder is empty")
 				end
 				return count
 			else
@@ -110,18 +117,24 @@ minetest.register_node("crushingfurnace:furnace", {
 })
 
 minetest.register_node("crushingfurnace:furnace_active", {
-	tiles = {"crushingfurnace_top.png", "crushingfurnace_bottom.png", "crushingfurnace_side.png",
-		"crushingfurnace_side.png", "crushingfurnace_side.png", "crushingfurnace_front_active.png"},
+	drawtype = "nodebox",
+	tiles = {"crushingfurnace_top.png", "crushingfurnace_bottom.png", "crushingfurnace_side_active.png",
+		"crushingfurnace_side_active.png", "crushingfurnace_side_active.png", "crushingfurnace_side_active.png"},
 	paramtype2 = "facedir",
-	light_source = 8,
+	light_source = 5,
 	drop = "crushingfurnace:furnace",
 	groups = {cracky=2, not_in_creative_inventory=1,hot=1},
-	legacy_facedir_simple = true,
+	node_box = {
+		type = "fixed",
+		fixed = {{-0.5, 0.5, -0.5, 0.5, 0+1/16, 0.5},
+				{-0.5+1/16, 0+1/16, -0.5+1/16, 0.5-1/16, 0-1/16, 0.5-1/16},
+				{-0.5, -0.5, -0.5, 0.5, 0-1/16, 0.5},}
+	},
 	sounds = default.node_sound_stone_defaults(),
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", furnace_inactive_formspec)
-		meta:set_string("infotext", "Crushing Furnace");
+		meta:set_string("infotext", "Grinder");
 		local inv = meta:get_inventory()
 		inv:set_size("fuel", 1)
 		inv:set_size("src", 1)
@@ -145,7 +158,7 @@ minetest.register_node("crushingfurnace:furnace_active", {
 		if listname == "fuel" then
 			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
 				if inv:is_empty("src") then
-					meta:set_string("infotext","Crushing Furnace is empty")
+					meta:set_string("infotext","Grinder is empty")
 				end
 				return stack:get_count()
 			else
@@ -164,7 +177,7 @@ minetest.register_node("crushingfurnace:furnace_active", {
 		if to_list == "fuel" then
 			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
 				if inv:is_empty("src") then
-					meta:set_string("infotext","Crushing Furnace is empty")
+					meta:set_string("infotext","Grinder is empty")
 				end
 				return count
 			else
@@ -241,7 +254,7 @@ minetest.register_abm({
 		if meta:get_float("fuel_time") < meta:get_float("fuel_totaltime") then
 			local percent = math.floor(meta:get_float("fuel_time") /
 					meta:get_float("fuel_totaltime") * 100)
-			meta:set_string("infotext","Crushing Furnace active: "..percent.."%")
+			meta:set_string("infotext","Grinder active: "..percent.."%")
 			hacky_swap_node(pos,"crushingfurnace:furnace_active")
 			meta:set_string("formspec", get_furnace_active_formspec(pos, percent))
 			return
@@ -261,7 +274,7 @@ minetest.register_abm({
 		end
 
 		if fuel.time <= 0 then
-			meta:set_string("infotext", "Crushing Furnace out of fuel")
+			meta:set_string("infotext", "Grinder out of fuel")
 			hacky_swap_node(pos, "crushingfurnace:furnace")
 			meta:set_string("formspec", furnace_inactive_formspec)
 			return
@@ -269,7 +282,7 @@ minetest.register_abm({
 
 		if cooked.item:is_empty() then
 			if was_active then
-				meta:set_string("infotext", "Crushing Furnace is empty")
+				meta:set_string("infotext", "Grinder is empty")
 				hacky_swap_node(pos, "crushingfurnace:furnace")
 				meta:set_string("formspec", furnace_inactive_formspec)
 			end
@@ -286,8 +299,8 @@ minetest.register_abm({
 minetest.register_craft({
 	output = 'crushingfurnace:furnace',
 	recipe = {
-		{'default:cobble', 'default:cobble', 'default:cobble'},
+		{'group:stone', 'group:stone', 'group:stone'},
 		{'', 'default:stick', ''},
-		{'default:cobble', 'default:cobble', 'default:cobble'},
+		{'group:stone', 'group:stone', 'group:stone'},
 	}
 })
