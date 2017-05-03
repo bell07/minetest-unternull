@@ -19,7 +19,7 @@ minetest.register_craft({
 	}
 })
 
-if not minetest.get_modpath("nodetest") then
+if not minetest.registered_items["nodetest:papyrus_roots"] then
 
 minetest.register_node(":nodetest:papyrus_roots", {
 	description = "Papyrus Roots",
@@ -34,13 +34,14 @@ minetest.register_node(":nodetest:papyrus_roots", {
 minetest.register_craft({
 	output = 'nodetest:papyrus_roots',
 	recipe = {
-		{'default:papyrus', 'default:papyrus'},
-		{'default:papyrus', 'default:papyrus'},
+		{'default:papyrus', 'default:papyrus', 'default:papyrus'},
+		{'default:papyrus', 'default:papyrus', 'default:papyrus'},
+		{'default:papyrus', 'default:papyrus', 'default:papyrus'},
 	}
 })
 
 minetest.register_craft({
-	output = 'default:papyrus 4',
+	output = 'default:papyrus 9',
 	recipe = {
 		{'nodetest:papyrus_roots'},
 	}
