@@ -171,8 +171,18 @@ default.cool_lava = function(pos, node)
 		end
 		minetest.set_node(pos, {name = cool_source})
 	else -- Lava flowing
-		local cool_flowing = choose_ore()
-		minetest.set_node(pos, {name = cool_flowing})
+		local ORE_RARITY = 5
+		local stone = "default:stone"
+		for _, ore in pairs(minetest.registered_ores) do
+			if ore.wherein == stone and ore.ore_type == "scatter" then
+				local rarity = math.floor(ORE_RARITY * ore.clust_scarcity / ore.clust_size)
+				if math.random(rarity) == 1 then
+					stone = ore.ore
+					break
+				end
+			end
+		end
+		minetest.set_node(pos, {name = stone})
 	end
 	minetest.sound_play("default_cool_lava",
 		{pos = pos, max_hear_distance = 16, gain = 0.25})
