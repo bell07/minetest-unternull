@@ -14,6 +14,12 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	type = "cooking",
+	output = "default:coal_lump",
+	recipe = "group:tree",
+})
+
+minetest.register_craft({
 	output = "default:mossycobble",
 	type = "shapeless",
 	recipe = {"default:cobble", "group:flora"},
