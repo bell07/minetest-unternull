@@ -121,7 +121,7 @@ local function choose_ore()
 	for _, ore in pairs(minetest.registered_ores) do
 		if is_not_an_ore(ore.ore) then
 			-- Do noting, keep cycling.
-		elseif ore.wherein == stone and ore.ore_type == "scatter" then
+		elseif ore.wherein == cool_flowing and ore.ore_type == "scatter" then
 			local rarity = math.floor(ore.clust_scarcity / ore.clust_size)
 			if math.random(rarity) == 1 then
 				cool_flowing = ore.ore
