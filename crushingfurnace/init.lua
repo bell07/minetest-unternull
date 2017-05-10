@@ -304,3 +304,21 @@ minetest.register_craft({
 		{'group:stone', 'group:stone', 'group:stone'},
 	}
 })
+
+if minetest.global_exists("smart_inventory") and smart_inventory.crecipes.add_recipes_from_list then
+	-- add grinder recipes to smart inventory database
+	local crecipes = smart_inventory.crecipes
+	local cache = smart_inventory.cache
+	local function fill_citem_recipes()
+		local recipelist = {}
+		for _, e in ipairs(crushingfurnace_receipes) do
+			table.insert(recipelist, {
+					output = e[2],
+					items = {e[1]},
+					type = "grinding"
+				})
+		end
+		crecipes.add_recipes_from_list(recipelist)
+	end
+	 cache.register_on_cache_filled(fill_citem_recipes)
+end
