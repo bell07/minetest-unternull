@@ -26,6 +26,8 @@ local crushingfurnace_receipes = {
 	{"default:cobble", "default:gravel",      8},
 	{"default:gravel", "default:sand",        5},
 	{"default:sand", "default:dirt",        5},
+	{"default:dirt", "default:clay_lump",     5},
+	{"default:desert_cobble", "default:desert_sand", 5},
 }
 
 function crushingfurnace_get_craft_result(input)

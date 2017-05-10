@@ -27,6 +27,26 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'default:desert_cobble 9',
+	recipe = {
+		{'default:gravel', 'default:gravel', 'default:gravel'},
+		{'default:gravel', 'default:lava_source', 'default:gravel'},
+		{'default:gravel', 'default:gravel', 'default:gravel'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:desert_cobble 9',
+	recipe = {
+		{'default:gravel', 'default:gravel', 'default:gravel'},
+		{'default:gravel', 'bucket:bucket_lava', 'default:gravel'},
+		{'default:gravel', 'default:gravel', 'default:gravel'},
+	},
+	replacements = {{"bucket:bucket_lava", "bucket:bucket_empty"}}
+})
+
+
 if not minetest.registered_items["nodetest:papyrus_roots"] then
 
 minetest.register_node(":nodetest:papyrus_roots", {
