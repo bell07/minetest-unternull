@@ -141,8 +141,8 @@ end
 
 -- Lava cooling
 
--- Exclude coal and diamond from being generated
-additional_stuff.not_an_ore = {"default:stone_with_coal", "default:stone_with_diamond"}
+-- Exclude bedrock, coal and diamond from being generated
+additional_stuff.not_an_ore = {"default:stone_with_coal", "default:stone_with_diamond", "bedrock:deepstone", "bedrock:bedrock"}
 additional_stuff.not_an_ore = {"default:stone_with_coal"} --bell07 prefered setting
 
 local function is_not_an_ore(ore_name)
