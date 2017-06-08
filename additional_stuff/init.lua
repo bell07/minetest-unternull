@@ -46,6 +46,12 @@ minetest.register_craft({
 	replacements = {{"bucket:bucket_lava", "bucket:bucket_empty"}}
 })
 
+minetest.register_craft({
+	output = "default:silver_sand",
+	type = "shapeless",
+	recipe = {"default:sand", "default:snowblock"},
+})
+
 
 if not minetest.registered_items["nodetest:papyrus_roots"] then
 
