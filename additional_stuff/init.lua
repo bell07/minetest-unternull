@@ -64,12 +64,12 @@ minetest.register_craft({
 	recipe = {
 		{'default:papyrus', 'default:papyrus', 'default:papyrus'},
 		{'default:papyrus', 'default:papyrus', 'default:papyrus'},
-		{'default:papyrus', 'default:papyrus', 'default:papyrus'},
+		{'default:papyrus', 'default:papyrus', ''},
 	}
 })
 
 minetest.register_craft({
-	output = 'default:papyrus 9',
+	output = 'default:papyrus 8',
 	recipe = {
 		{'nodetest:papyrus_roots'},
 	}
