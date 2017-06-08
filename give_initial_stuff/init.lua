@@ -17,7 +17,11 @@ local function fill_chest(blockpos)
 	inv:set_size("main", 8*4)
 	-- Fill with stuff
 	inv:set_stack("main", 1, 'default:cobble 12')
-	inv:set_stack("main", 2, 'nodetest:papyrus_roots 6')
+	if minetest.get_modpath("water") then
+		inv:set_stack("main", 2, 'nodetest:papyrus_roots 6')
+	else
+		inv:set_stack("main", 2, 'bucket:bucket_water 6')
+	end
 	inv:set_stack("main", 3, 'default:dirt 2')
 	inv:set_stack("main", 4, 'default:sapling')
 	inv:set_stack("main", 5, 'default:junglesapling')
@@ -29,13 +33,21 @@ end
 if minetest.global_exists("startanode") then
 	minetest.log("Undernull startup player chests handeled by startanode mod")
 	if minetest.get_modpath("water") then
+		-- start-a-node will be the chest. Trough papyrus_roots the player can start at each place on water surface
 		local water_level = minetest.setting_get("water_level") or 0
 		startanode.min_pos.y = water_level -1
 		startanode.max_pos.y = water_level -1
-	end
-	startanode.node_name = "default:chest"
-	startanode.after_place_func = function(player, pos)
-		fill_chest(pos)
+		startanode.node_name = "default:chest"
+		startanode.after_place_func = function(player, pos)
+			fill_chest(pos)
+		end
+	else
+		-- without water: keep the start-a-node as stone and place the chest above
+		startanode.after_place_func = function(player, pos)
+			chestpos = {x=pos.x, y=pos.y+1,z=pos.z}
+			minetest.set_node(chestpos, {name="default:chest"})
+			fill_chest(chestpos)
+		end
 	end
 	return
 end
