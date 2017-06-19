@@ -24,7 +24,8 @@ local furnace_inactive_formspec =
 local crushingfurnace_receipes = {
 	--input                 output            time
 	{"default:cobble", "default:gravel",      8},
-	{"default:gravel", "default:sand",        5},
+	{"default:gravel", "default:sand",        5,},
+	{"gravelsieve:compressed_gravel", "default:sand",        6},
 	{"default:sand", "default:clay_lump",     5},
 	{"default:desert_cobble", "default:desert_sand", 5},
 	{"default:ice", "default:snowblock",   2},

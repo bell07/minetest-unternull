@@ -38,7 +38,7 @@ if minetest.global_exists("startanode") then
 			fill_chest(pos)
 		end
 	else
-		-- keep the start-a-node as stone and place the chest above without water
+		-- without water: keep the start-a-node as stone and place the chest above
 		startanode.after_place_func = function(player, pos)
 			chestpos = {x=pos.x, y=pos.y+1,z=pos.z}
 			minetest.set_node(chestpos, {name="default:chest"})
