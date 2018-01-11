@@ -1,4 +1,5 @@
-local WATER_LEVEL = minetest.setting_get("water_level")
+local water = {}
+water.node = minetest.settings:get("water_node") or "default:water_source"
 
 minetest.register_on_mapgen_init(function(mgparams)
 	minetest.set_mapgen_params({mgname="singlenode"})
@@ -7,7 +8,7 @@ end)
 -- [[
 minetest.register_on_generated(function(minp, maxp, seed)
 --	local t1 = os.clock()
-	if minp.y > 1 then
+	if minp.y > 1 or not water.node then
 		return
 	end
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
@@ -18,7 +19,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
  
 	local data = vm:get_data()
  
-	local c_water = minetest.get_content_id("default:water_source")
+	local c_water = minetest.get_content_id(water.node)
  
 	local sidelen = maxp.x - minp.x + 1
  
@@ -27,7 +28,6 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	for y = minp.y, maxp.y do
 	for x = minp.x, maxp.x do
 		if y < 1 then
---		if minp.y+y < WATER_LEVEL then
 			local vi = a:index(x, y, z)
 				data[vi] = c_water
 		end
