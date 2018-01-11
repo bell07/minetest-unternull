@@ -14,12 +14,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	type = "cooking",
-	output = "default:coal_lump",
-	recipe = "group:tree",
-})
-
-minetest.register_craft({
 	output = "default:mossycobble",
 	type = "shapeless",
 	recipe = {"default:cobble", "group:flora"},
@@ -155,7 +149,7 @@ local function is_not_an_ore(ore_name)
 end
 
 -- Place ore just as often as they occur in mapgen.
-local function choose_ore(pos)
+local function choose_ore()
 	local cool_flowing = "default:stone"
 	for _, ore in pairs(minetest.registered_ores) do
 		if is_not_an_ore(ore.ore) then
@@ -184,7 +178,7 @@ default.cool_lava = function(pos, node)
 		end
 		minetest.set_node(pos, {name = cool_source})
 	else -- Lava flowing
-		local cool_flowing = choose_ore(pos)
+		local cool_flowing = choose_ore()
 		minetest.set_node(pos, {name = cool_flowing})
 	end
 	minetest.sound_play("default_cool_lava",
