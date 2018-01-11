@@ -1,6 +1,6 @@
-local water = {}
+water = {}
 water.node = minetest.settings:get("water_node") or "default:water_source"
-
+print("---------------------", water.node)
 minetest.register_on_mapgen_init(function(mgparams)
 	minetest.set_mapgen_params({mgname="singlenode"})
 end)
@@ -8,7 +8,7 @@ end)
 -- [[
 minetest.register_on_generated(function(minp, maxp, seed)
 --	local t1 = os.clock()
-	if minp.y > 1 or not water.node then
+	if minp.y > 1 or not water.node or water.node == "air" then
 		return
 	end
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
