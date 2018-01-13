@@ -17,13 +17,15 @@ local initial_stuff = {
 			'default:sapling 2',
 		},
 		["air"] = {
-			'bucket:bucket_water 6',
+			'bucket:bucket_water',
+			'bucket:bucket_water',
 		},
 		["default:water_source"] = {
 			'nodetest:papyrus_roots 6',
 		},
 		["default:lava_source"] = {
-			'bucket:bucket_water 6',
+			'bucket:bucket_water',
+			'bucket:bucket_water',
 		},
 	}
 
